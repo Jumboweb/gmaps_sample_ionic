@@ -1,7 +1,7 @@
 {
   "name": "ionic-starter",
   "version": "0.0.1",
-  "description": "Ionic starter Jumboweb",
+  "description": "Map Sample Jumboweb",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
@@ -21,6 +21,10 @@
     "org.apache.cordova.device",
     "org.apache.cordova.dialogs",
     "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin",
-    "org.apache.cordova.inappbrowser"
+    "org.apache.cordova.inappbrowser",
+    "org.apache.cordova.geolocation"
+  ],
+  "cordovaPlatforms": [
+    "android"
   ]
 }

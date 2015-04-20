@@ -154,7 +154,7 @@ var Logger = (function(){
           });
         }
       }
-      if(name === 'error' && config.debug && event.data.error){
+      if(name === 'error' && config.debug){
         var msg = event.data && event.data.error ? (event.data.error.message ? event.data.error.message : event.data.error) : '';
         window.alert('Error: '+event.data.type+'\n'+msg+'\nPlease contact: '+Config.emailSupport);
       }

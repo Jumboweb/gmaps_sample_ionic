@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "homepage": "http://www.jumboweb.fr",
   "authors": [ "Pierre-Julien D'alberto <dalberto.pj@gmail.com>" ],
-  "description": "Ionic starter Jumboweb",
+  "description": "Map Sample Jumboweb",
   "main": "www/index.html",
   "keywords": [
     "html5",

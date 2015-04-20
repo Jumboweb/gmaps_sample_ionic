@@ -6,14 +6,9 @@ angular.module('app', ['ionic', 'ngCordovaMocks', 'LocalForageModule'])
 angular.module('app', ['ionic', 'ngCordova', 'LocalForageModule'])
 // @endif
 
-.config(function($stateProvider, $urlRouterProvider, $provide, $httpProvider, AuthSrvProvider) {
+.config(function($stateProvider, $urlRouterProvider, $provide, $httpProvider) {
   'use strict';
   $stateProvider
-  .state('login', {
-    url: '/login',
-    templateUrl: 'views/login.html',
-    controller: 'LoginCtrl'
-  })
   .state('app', {
     url: '/app',
     abstract: true,
@@ -38,13 +33,19 @@ angular.module('app', ['ionic', 'ngCordova', 'LocalForageModule'])
         controller: 'HomeCtrl'
       }
     }
+  })
+  .state('app.tabs.map', {
+    url: '/map',
+    views: {
+      'map-tab': {
+        templateUrl: 'views/map.html',
+        controller: 'MapCtrl'
+      }
+    }
   });
 
-  if(AuthSrvProvider.isLogged()){
-    $urlRouterProvider.otherwise('/app/tabs/home');
-  } else {
-    $urlRouterProvider.otherwise('/login');
-  }
+
+  $urlRouterProvider.otherwise('/app/tabs/home');
 
   // improve angular logger
   $provide.decorator('$log', ['$delegate', 'customLogger', function($delegate, customLogger){
@@ -56,18 +57,6 @@ angular.module('app', ['ionic', 'ngCordova', 'LocalForageModule'])
 
 .constant('Config', Config)
 
-.run(function($rootScope, $state, $log, AuthSrv, UserSrv, Config){
+.run(function($rootScope, $state, $log, Config){
   'use strict';
-  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-    var logged = AuthSrv.isLogged();
-    if(toState.name === 'login' && logged){
-      event.preventDefault();
-      $log.log('IllegalAccess', 'Already logged in !');
-      $state.go('app.tabs.home');
-    } else if(toState.name !== 'login' && !logged){
-      event.preventDefault();
-      $log.log('IllegalAccess', 'Not allowed to access to <'+toState.name+'> state !');
-      $state.go('login');
-    }
-  });
 });
